@@ -1,0 +1,152 @@
+//= require devise_bootstrap_views
+
+html, body {
+  float: left;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  display: block;
+  float: left;
+}
+
+body {
+  background-image: linear-gradient(to bottom, #cfcdb6, #c5780c);
+}
+
+h1 {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+h2 {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.super-form {
+  display: table;
+  width: 100%;
+  padding: 10px;
+  padding-right: 60px;
+}
+
+.cell {
+  display: table-cell;
+  width: 100%;
+  padding: 0 15px;
+}
+
+.title {
+  background: blue;
+  margin: -10px -10px 10px -10px;
+  background-image: linear-gradient(to bottom, #5081b8, #3d61a0);
+}
+
+.title input.super-input {
+  font-size: 19px;
+  color: white;
+}
+
+.title input.super-input:focus {
+  color: black;
+}
+
+.calendar {
+  opacity: 0.5;
+  display: table-cell;
+  width: 30px;
+  font-size: 22px;
+  vertical-align: middle;
+}
+
+.cell-sm {
+  display: table-cell;
+  width: 30px;
+  padding: 0 15px;
+  vertical-align: middle;
+}
+::-webkit-datetime-edit-year-field:not([aria-valuenow]),
+::-webkit-datetime-edit-month-field:not([aria-valuenow]),
+::-webkit-datetime-edit-day-field:not([aria-valuenow]) {
+    color: transparent;
+}
+.add-form {
+  padding: 10px;
+  margin: -10px -10px 10px -10px;
+  background-image: linear-gradient(to bottom, #e0e1e0, #cfcfcf);
+  border-bottom: 1px solid #ddd;
+}
+
+.cell-md {
+  display: table-cell;
+  width: 60px;
+  padding: 0 15px;
+  vertical-align: middle;
+}
+
+.cell-plus {
+  display: table-cell;
+  padding: 0 0 0 20px;
+  font-size: 22px;
+  vertical-align: middle;
+  color: #57956d;
+}
+
+.list {
+  margin-bottom: 30px;
+  border: 1px solid #ddd;
+  margin-bottom: 30px;
+  background: white;
+  position: relative;
+  padding: 10px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+input.super-input {
+  display: table-cell;
+  width: 100%;
+  height: 30px;
+  padding: 0 8px;
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  background: transparent;
+}
+
+input.super-input + .controls {
+  display: table-cell;
+  vertical-align: middle;
+  padding-left: 15px;
+  width: 30px;
+  white-space: nowrap;
+}
+
+.list .btn-link {
+  color: rgba(255, 255, 255, 0.53);
+}
+
+input.super-input + .controls .addon {
+  opacity: 0;
+  display: inline-block;
+}
+
+input.super-input + .controls .toggler {
+  display: inline-block;
+}
+
+input.super-input:focus {
+  background: white;
+}
+
+input.super-input:focus + .controls .addon {
+  opacity: 1;
+}
+

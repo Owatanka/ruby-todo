@@ -1,0 +1,97 @@
+<div style='padding: 30px 0;'>
+  <div style='text-align: right; padding-right: 30px;'>
+    <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+  </div>
+  <div class='container'>
+    <h1>Simple todo list</h1>
+    <h2>From Rubygarage</h2>
+
+    <% flash.each do |type, message| %>
+      <div class="alert alert-<%= type %> fade in">
+        <button class="close" data-dismiss="alert">×</button>
+        <%= message %>
+      </div>
+    <% end %>
+
+    <div>
+      <% @lists.each do |list| %>
+        <div class='list'>
+          <div style='position: absolute; right: 0;'>
+            <%= button_to list, method: :delete, class: 'btn btn-link' do %>
+              <span class="glyphicon glyphicon-trash"></span>
+            <% end %>
+          </div>
+
+          <%= form_for list do |f| %>
+            <div class='title'>
+              <div class='super-form'>
+                <div class='calendar'><span class='glyphicon glyphicon-calendar'></span></div>
+                <%= f.text_field :name, class: 'super-input' %>
+                <div class='controls'>
+                  <div class='addon'><%= f.submit 'Update', class: 'btn btn-success' %></div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          <div class='add-form'>
+            <%= form_for Task.new, class: 'form-inline' do |f| %>
+              <%= f.hidden_field :prio, value: list.tasks.count %>
+              <%= f.hidden_field :list_id, value: list.id %>
+              <div class='row'>
+                <div class='super-form' style='padding: 0;'>
+                  <div class='cell-plus'>
+                    <span class='glyphicon glyphicon-plus'></span>
+                  </div>
+                  <div class='cell'>
+                    <%= f.text_field :name, required: true, placeholder: 'name', class: 'form-control' %>
+                  </div>
+                  <div class='cell-md'>
+                    <%= f.date_field :deadline, placeholder: 'deadline', class: 'form-control' %>
+                  </div>
+                  <div class='cell-sm'>
+                    <%= f.submit 'Add task', class: 'btn btn-success' %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+          <div>
+            <% list.tasks.order(prio: :desc).each do |task| %>
+              <%= form_for task, class: 'form-inline' do |f| %>
+                <%= f.hidden_field :prio %>
+                <%= f.hidden_field :list_id %>
+                <div class='row'>
+                  <div class='super-form' style='padding: 0;'>
+                    <div class='cell-sm'>
+                      <%= f.check_box :done %>
+                    </div>
+                    <div class='cell'>
+                      <%= f.text_field :name, required: true, placeholder: 'name', class: 'form-control' %>
+                    </div>
+                    <div class='cell-md'>
+                      <%= f.date_field :deadline, placeholder: 'deadline', class: 'form-control' %>
+                    </div>
+                    <div class='cell-sm'>
+                      <%= f.submit 'Update', class: 'btn btn-success' %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <%= form_for current_user.lists.new do |f| %>
+      <div class='input-group'>
+        <%= f.hidden_field :user_id %>
+        <%= f.text_field :name, class: 'form-control' %>
+        <div class='input-group-btn'>
+          <%= f.submit 'Add List', class: 'btn btn-primary' %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+</div>
