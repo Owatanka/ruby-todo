@@ -1,4 +1,9 @@
 # Ruby Garage Test Task
+
+Demo: 
+https://github.com/Owatanka/ruby-todo/    
+https://owatanka-todo.herokuapp.com/
+
 Given tables:
 ★ tasks (id, name, status, list_id)
 ★ lists (id, name)
