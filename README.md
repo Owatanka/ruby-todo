@@ -1,24 +1,53 @@
-# README
+# Ruby Garage Test Task
+Given tables:
+★ tasks (id, name, status, list_id)
+★ lists (id, name)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Write the queries for:
+1. get all statuses, not repeating, alphabetically ordered
 
-Things you may want to cover:
+   SELECT DISTINCT status FROM tasks ORDER BY status;
+  
+2. get the count of all tasks in each project, order by tasks count descending
 
-* Ruby version
+   SELECT COUNT(*) AS amount FROM tasks GROUP BY list_id ORDER BY amount DESC;
+      
+3. get the count of all tasks in each project, order by projects names
 
-* System dependencies
+   SELECT COUNT(*) AS amount, lists.name FROM tasks INNER JOIN lists ON list_id = lists.id 
+   GROUP BY lists.name ORDER BY lists.name ASC;
+      
+4. get the tasks for all projects having the name beginning with “N” letter
 
-* Configuration
+   SELECT * FROM tasks WHERE name like 'N%';
+      
+5. get the list of all projects containing the ‘a’ letter in the middle of the name, and
+show the tasks count near each project. Mention that there can exist projects without
+tasks and tasks with project_id=NULL
 
-* Database creation
+   SELECT lists.name, (select count(*) FROM tasks WHERE tasks.list_id=lists.id) 
+   FROM lists WHERE lists.name like '_%a%_'
+      
+6. get the list of tasks with duplicate names. Order alphabetically
 
-* Database initialization
+   SELECT id, name, status, list_id FROM tasks WHERE name in (select name from tasks 
+   GROUP BY name having (COUNT(name)>1)) ORDER BY name
+      
+7. get the list of tasks having several exact matches of both name and status, from
+the project ‘Garage’. Order by matches count    
 
-* How to run the test suite
+   SELECT count (*) as matches_count,tasks.name,tasks.status 
+   FROM tasks, lists where lists.name='Garage' and list_id = lists.id 
+   GROUP BY tasks.name,tasks.status having (count(*) >1) ORDER BY matches_count
+   
+8. get the list of project names having more than 10 tasks in status 'completed'. Order by project_id
 
-* Services (job queues, cache servers, search engines, etc.)
+   SELECT name FROM lists WHERE id in (select list_id 
+   FROM tasks, lists WHERE status='completed' and list_id = lists.id 
+   GROUP BY list_id having (count(*) >10)) ORDER BY id
+   
+   
+   
+   
 
-* Deployment instructions
-
-* ...
+   
