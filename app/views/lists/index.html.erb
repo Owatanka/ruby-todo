@@ -1,8 +1,8 @@
-<div style='padding: 30px 0;'>
+<div>
   <div style='text-align: right; padding-right: 30px;'>
     <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
   </div>
-  <div class='container'>
+  <div class='clearfix'>
     <h1>Simple todo list</h1>
     <h2>From Rubygarage</h2>
 
@@ -57,26 +57,35 @@
           </div>
           <div>
             <% list.tasks.order(prio: :desc).each do |task| %>
-              <%= form_for task, class: 'form-inline' do |f| %>
-                <%= f.hidden_field :prio %>
-                <%= f.hidden_field :list_id %>
-                <div class='row'>
-                  <div class='super-form' style='padding: 0;'>
-                    <div class='cell-sm'>
-                      <%= f.check_box :done %>
+              <div class='row'>
+                <div class='col-xs-11'>
+                  <%= form_for task, class: 'form-inline' do |f| %>
+                    <%= f.hidden_field :prio %>
+                    <%= f.hidden_field :list_id %>
+                    <div class='row'>
+                      <div class='super-form' style='padding: 0;'>
+                        <div class='cell-sm'>
+                          <%= f.check_box :done %>
+                        </div>
+                        <div class='cell'>
+                          <%= f.text_field :name, required: true, placeholder: 'name', class: 'form-control' %>
+                        </div>
+                        <div class='cell-md'>
+                          <%= f.date_field :deadline, placeholder: 'deadline', class: 'form-control' %>
+                        </div>
+                        <div class='cell-sm'>
+                          <%= f.submit 'Update', class: 'btn btn-success' %>
+                        </div>
+                      </div>
                     </div>
-                    <div class='cell'>
-                      <%= f.text_field :name, required: true, placeholder: 'name', class: 'form-control' %>
-                    </div>
-                    <div class='cell-md'>
-                      <%= f.date_field :deadline, placeholder: 'deadline', class: 'form-control' %>
-                    </div>
-                    <div class='cell-sm'>
-                      <%= f.submit 'Update', class: 'btn btn-success' %>
-                    </div>
-                  </div>
+                  <% end %>
                 </div>
-              <% end %>
+                <div class='col-xs-1'>
+                  <%= link_to task, method: :delete do %>
+                    <button class='btn btn-danger btn-block'>Delete</button>
+                  <% end %>
+                </div>
+              </div>
             <% end %>
           </div>
         </div>
