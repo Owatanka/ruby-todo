@@ -6,7 +6,7 @@ class ListsController < ApplicationController
 
   def update
     list = List.find(params[:id])
-    if list.update(params.require(:list).permit(:name, :user_id))
+    if list.user.id == current_user.id && list.update(params.require(:list).permit(:name, :user_id))
       flash[:success] = 'List Updated!'
     else
       flash[:error] = 'List not updated!'
@@ -16,7 +16,7 @@ class ListsController < ApplicationController
 
   def create
     list = List.new(params.require(:list).permit(:name, :user_id))
-    if list.save
+    if list.user.id == current_user.id && list.save
       flash[:success] = 'List added!'
     else
       flash[:error] = 'List not added!'
@@ -26,7 +26,7 @@ class ListsController < ApplicationController
 
   def destroy
     list = List.find(params[:id])
-    if list.destroy
+    if list.user.id == current_user.id && list.destroy
       flash[:success] = 'List removed!'
     else
       flash[:success] = 'List not removed!'
