@@ -6,7 +6,7 @@ class ListsController < ApplicationController
 
   def update
     list = List.find(params[:id])
-    if list.user.id == current_user.id && list.update(params.require(:list).permit(:name, :user_id))
+    if list.user.id == current_user.id && list.update(params.require(:list).permit(:name))
       flash[:success] = 'List Updated!'
     else
       flash[:error] = 'List not updated!'
